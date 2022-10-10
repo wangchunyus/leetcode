@@ -1,0 +1,33 @@
+### 解题思路
+
+第一次写题解 生疏请谅解
+看到这个问题首先想到的是
+固定好一个窗口，每次指到新的数时添加最新的，删除最后面的
+首先用一个for循环来获得数组中 **前k个元素** 的值 并且把他赋给我们的result;
+然后进行循环数组，从k开始 因为我们已经获得的值最大为 **k-1** 的索引 所以从k开始循环 到length停止
+每次获得一个值 我们就把他加入sum 并且删除 **i-k** 位置的值（最后一个）
+用一个max来获得result 和当前sum的一个大的值 并存入result
+最后用result / k 来获得平均值
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int sum=0;
+        for(int i=0;i<k;i++){
+            sum+=nums[i];
+        }
+        int result=sum;
+        for(int i=k;i<nums.length;i++){
+            sum=sum+nums[i]-nums[i-k];
+            result=Math.max(sum,result);
+        }
+        return (double)result/k;
+
+    }
+}
+```
+

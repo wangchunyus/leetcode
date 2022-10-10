@@ -1,0 +1,26 @@
+解题思路：`排序 + 贪心`
+
+AC代码：
+
+* java
+
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        // 胃口和饼干排序
+        Arrays.sort(g);
+        Arrays.sort(s);
+        // 最大满足数量
+        int res = 0;
+        int index = s.length - 1; // 饼干下标
+        for(int i = g.length - 1; i >= 0; -- i) { // 遍历孩子胃口
+            if(index >= 0 && s[index] >= g[i]) {
+                res ++;
+                index --;
+            }
+        }
+        return res;
+    }
+}
+```
+

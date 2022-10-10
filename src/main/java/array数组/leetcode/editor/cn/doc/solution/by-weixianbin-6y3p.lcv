@@ -1,0 +1,61 @@
+递归思路:
+明白递归三要素
+1.确定递归函数的参数和返回值
+2.确定终止条件
+3.确定单层递归的内容(重复调用自己来实现递归的过程。
+
+* 
+
+```
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        preorder(root,list);
+        return list;
+    }
+    private void preorder(TreeNode root, List<Integer> list){
+        if(root == null){
+            return ;
+        }
+        list.add(root.val);
+        preorder(root.left,list);
+        preorder(root.right,list);
+    }
+}
+```
+
+迭代思路
+1.把根节点放入栈中,判读栈是否为空
+2.把节点值保存起来
+3.判断右叶子节点是否为空,不为空就放入栈中
+4.判断左叶子节点是否为空,不为空就放入栈中
+为什么要先放右叶子节点而不是左叶子节点呢,前序遍历的顺序是,先根->左->右,这是因为,栈的特性是先入栈的后出,所以要改变一下入栈顺序
+
+* 
+
+```
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root == null){
+            return list;
+        }
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop();
+            list.add(cur.val);
+           
+            if(cur.right != null){
+                stack.push(cur.right);
+            }
+            //注意入栈的顺序,栈是先进后出
+            if(cur.left != null){
+                stack.push(cur.left);
+            }
+        }
+        return list;
+    }
+}
+```
+

@@ -1,0 +1,36 @@
+**方法一：**
+1.因为得分是不相同的，所以我们可以先将当前的每个运动员的得分下标记录到 一个Map中， key=得分  value=所在下标
+2.使用冒泡将当前的数组倒排
+3.循环倒排后的数组， 根据每个得分获取Map中的它对应的下标，按照下标对应到我们要返回的字符串数组中，存入对应的牌子名称或是编号
+
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < score.length; i++) {
+                map.put(score[i], i);
+            }
+            //冒泡排序
+            for (int z = 0; z < score.length - 1; z++) {
+                for (int k = 0; k < score.length - 1 - z; k++) {
+                    int temp;
+                    if (score[k] < score[k + 1]) {
+                        temp = score[k];
+                        score[k] = score[k + 1];
+                        score[k + 1] = temp;
+                    }
+                }
+
+            }
+            String[] result = new String[score.length];
+            for (int l = 0; l < score.length; l++) {
+                Integer index = map.get(score[l]);
+                if (l == 0) {
+                    result[index] = "Gold Medal";
+                } else if (l == 1) {
+                    result[index] = "Silver Medal";
+                } else if (l == 2) {
+                    result[index] = "Bronze Medal";
+                } else {
+                    result[index] = String.valueOf(l + 1);
+                }
+            }
+            return result;
+

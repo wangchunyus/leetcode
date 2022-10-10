@@ -1,0 +1,27 @@
+    class Solution {
+        public String destCity(List<List<String>> paths) {
+//            [["B","C"],["D","B"],["C","A"]]
+            ArrayList<String> list = new ArrayList<>();
+            for (List<String> path : paths) {
+                String s1 = path.get(0);
+                String s2 = path.get(1);
+                int index1 = list.indexOf(s1);
+                int index2 = list.indexOf(s2);
+                if (index1 == -1 && index2 == -1) {
+                    list.add(s1);
+                    list.add(s2);
+                } else if (index1 != -1) {
+                    list.add(index1 + 1, s2);
+                } else {
+                    list.add(index2 > 0 ? index2 - 1 : 0, s1);
+                }
+            }
+            return list.get(list.size() - 1);
+        }
+    }
+
+//total_testcases:103
+//total_correct:26
+//input_formatted:[["ZrkzUqobDv","TINDTEETTv"],["OozshcOhpB","ZrkzUqobDv"],["RptSdsUfeH","BTYVayMQGQ"],["ugNmb BOBZ","JCuKctgrbi"],["JCuKctgrbi","OozshcOhpB"],["BTYVayMQGQ","ugNmb BOBZ"]]
+//expected_output:"TINDTEETTv"
+//code_output:"OozshcOhpB"
