@@ -79,7 +79,7 @@ public class Solution_26 {
         public int removeDuplicates(int[] nums) {
             //[0,0,1,1,2,3,4,5,5,6]
             //[0,1,2,3,4,5]
-            if(nums == null ) return  0;
+           /* if(nums == null ) return  0;
             int p = 0;
             int q = 1;
             while (q < nums.length){
@@ -91,8 +91,18 @@ public class Solution_26 {
                     p++;
                 }
             }
-            return p+1;
+            return p+1;*/
 
+            if(nums == null ) return  0;
+            int count = 0;
+            for (int i = 1; i < nums.length; i++) {
+                if(nums[i] == nums[i-1]){
+                    continue;
+                }else{
+                    count++;
+                }
+            }
+            return count;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

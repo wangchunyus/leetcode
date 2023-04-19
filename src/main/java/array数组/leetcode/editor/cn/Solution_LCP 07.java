@@ -56,51 +56,41 @@ import java.util.List;
  * @since 2022-07-22 10:09:08
  **/
 
-class LCP_07 {
-    public static void main(String[] args) {
-        Solution solution = new LCP_07().new Solution();
-        int[][] re = {{0,2},{2,1},{3,4},{2,3},{1,4},{2,0},{0,4}};
-        int n = 5;
-        int k = 3;
-        int i = solution.numWays(n, re, k);
-        System.out.println(i);
+
+//leetcode submit region begin(Prohibit modification and deletion)
+class Solution {
+    int ways, n, k;
+    List<List<Integer>> edges;
+
+    public int numWays(int n, int[][] relation, int k) {
+        ways = 0;
+        this.n = n;
+        this.k = k;
+        edges = new ArrayList<List<Integer>>();
+        for (int i = 0; i < n; i++) {
+            edges.add(new ArrayList<Integer>());
+        }
+        for (int[] edge : relation) {
+            int src = edge[0], dst = edge[1];
+            edges.get(src).add(dst);
+        }
+        dfs(0, 0);
+        return ways;
     }
 
-    //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
-        int ways, n, k;
-        List<List<Integer>> edges;
-
-        public int numWays(int n, int[][] relation, int k) {
-            ways = 0;
-            this.n = n;
-            this.k = k;
-            edges = new ArrayList<List<Integer>>();
-            for (int i = 0; i < n; i++) {
-                edges.add(new ArrayList<Integer>());
+    public void dfs(int index, int steps) {
+        if (steps == k) {
+            if (index == n - 1) {
+                ways++;
             }
-            for (int[] edge : relation) {
-                int src = edge[0], dst = edge[1];
-                edges.get(src).add(dst);
-            }
-            dfs(0, 0);
-            return ways;
+            return;
         }
-
-        public void dfs(int index, int steps) {
-            if (steps == k) {
-                if (index == n - 1) {
-                    ways++;
-                }
-                return;
-            }
-            List<Integer> list = edges.get(index);
-            for (int nextIndex : list) {
-                dfs(nextIndex, steps + 1);
-            }
-
+        List<Integer> list = edges.get(index);
+        for (int nextIndex : list) {
+            dfs(nextIndex, steps + 1);
         }
-//leetcode submit region end(Prohibit modification and deletion)
-
     }
 }
+
+//leetcode submit region end(Prohibit modification and deletion)
+
