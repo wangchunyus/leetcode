@@ -35,25 +35,27 @@
 
 package array数组.leetcode.editor.cn;
 
- /**
+/**
  * 1037.有效的回旋镖.valid-boomerang
  *
  * @author wangcy
- * @since  2022-07-07 14:42:21
+ * @since 2022-07-07 14:42:21
  **/
 
-  public class Solution_1037{
-      public static void main(String[] args) {
-           Solution solution = new Solution_1037().new Solution();
-      }
-      //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public boolean isBoomerang(int[][] points) {
+public class Solution_1037 {
+    public static void main(String[] args) {
+        Solution solution = new Solution_1037().new Solution();
+    }
 
-        return true;
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public boolean isBoomerang(int[][] points) {
+            int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+            int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+            return v1[0] * v2[1] - v1[1] * v2[0] != 0;
+        }
 
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
-  }
+}
